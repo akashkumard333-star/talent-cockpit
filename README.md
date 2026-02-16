@@ -141,8 +141,8 @@ https://github.com/akashkumard333-star/akashkumard333/blob/90a3f2d0e1c9072edac6b
 ```bash
 npm install
 npx cds watch
-
-
+```
+---
 👨‍💻 Author
 
 Akash Kumar
@@ -155,24 +155,3 @@ Cloud & Data Engineer | SAP Developer
 
 ---
 
-# 💡 How to Make It Look Even More Premium
-
-1. Add a custom banner image (I can generate one for Talent Cockpit).
-2. Convert demo to YouTube link (better than mp4).
-3. Add animated GIF of navigation flow.
-4. Add architecture diagram image.
-
----
-
-If you want, I can now:
-
-- 🎨 Generate a custom **project banner design prompt**
-- 🏗 Create a simple architecture diagram
-- ✍ Rewrite this in more senior-level wording
-- 🧠 Optimize it for recruiter scanning
-- 📈 Add impact metrics section
-
-Tell me which style you want:
-- Clean & Minimal
-- Portfolio Showcase
-- Enterprise Engineering Level
