@@ -1,0 +1,157 @@
+<mvc:View
+  controllerName="project1.controller.View1"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:core="sap.ui.core">
+
+  <f:DynamicPage id="dpList" showFooter="false">
+
+    <f:title>
+      <f:DynamicPageTitle>
+        <f:heading>
+          <Title text="Employees" level="H2"/>
+        </f:heading>
+      </f:DynamicPageTitle>
+    </f:title>
+
+    <!-- HEADER: filters always visible -->
+    <f:header>
+      <f:DynamicPageHeader pinnable="true">
+        <Toolbar>
+          <Label text="Active:" class="sapUiTinyMarginEnd"/>
+          <Select id="fActive" width="8rem" selectedKey="">
+            <core:Item key="" text="All"/>
+            <core:Item key="true" text="Yes"/>
+            <core:Item key="false" text="No"/>
+          </Select>
+
+          <ToolbarSpacer width="1rem"/>
+
+          <Label text="Location:" class="sapUiTinyMarginEnd"/>
+          <Input id="fLocation" width="10rem" showValueHelp="true" valueHelpRequest=".onLocationValueHelp"/>
+
+          <ToolbarSpacer width="1rem"/>
+
+          <Label text="Name:" class="sapUiTinyMarginEnd"/>
+          <Input id="fName" width="10rem" showValueHelp="true" valueHelpRequest=".onNameValueHelp"/>
+
+          <ToolbarSpacer width="1rem"/>
+
+          <Label text="Role:" class="sapUiTinyMarginEnd"/>
+          <Input id="fRole" width="10rem" showValueHelp="true" valueHelpRequest=".onRoleValueHelp"/>
+
+          <ToolbarSpacer/>
+
+          <Button text="Go" type="Emphasized" press=".onGo"/>
+          <Button text="Clear" press=".onClear"/>
+        </Toolbar>
+      </f:DynamicPageHeader>
+    </f:header>
+    
+
+    <!-- CONTENT -->
+    <f:content>
+      <VBox class="sapUiSmallMargin">
+        <HBox class="sapUiSmallMargin" justifyContent="SpaceBetween">
+
+      <VBox class="kpiBox sapUiSmallMarginEnd">
+        <Text text="Total Employees"/>
+        <ObjectNumber number="{ui>/kpi/totalEmployees}" state="None"/>
+      </VBox>
+
+      <VBox class="kpiBox sapUiSmallMarginEnd">
+        <Text text="Active Employees"/>
+        <ObjectNumber number="{ui>/kpi/activeEmployees}" state="Success"/>
+      </VBox>
+
+      <VBox class="kpiBox sapUiSmallMarginEnd">
+        <Text text="Total Projects"/>
+        <ObjectNumber number="{ui>/kpi/totalProjects}" state="Information"/>
+      </VBox>
+
+      <VBox class="kpiBox">
+        <Text text="Avg. Utilization"/>
+        <ObjectNumber
+          number="{ui>/kpi/avgUtilization}"
+          unit="%"
+          state="{= ${ui>/kpi/avgUtilization} > 80 ? 'Error' : ${ui>/kpi/avgUtilization} > 60 ? 'Warning' : 'Success' }"/>
+      </VBox>
+
+    </HBox>
+        <Toolbar class="sapUiSmallMarginTop">
+  <Title text="Employees"/>
+  <ToolbarSpacer/>
+  <Button text="Export CSV" icon="sap-icon://download" press=".onExportCSV"/>
+  <Button text="Update" type="Emphasized" enabled="{ui>/hasSelection}" press=".onEdit"/>
+</Toolbar>
+
+
+        <Table
+          id="tblEmployees"
+          mode="SingleSelectLeft"
+          includeItemInSelection="true"
+          growing="true"
+          growingScrollToLoad="true"
+          selectionChange=".onSelectionChange"
+          itemPress=".onItemPress"
+          items="{ path: 'ui>/Employees' }">
+
+          <columns>
+
+  <Column>
+    <HBox alignItems="Center" justifyContent="SpaceBetween">
+      <Text text="Name"/>
+      <Button icon="sap-icon://sort" type="Transparent" press=".onSortName"/>
+    </HBox>
+  </Column>
+
+  <Column>
+    <HBox alignItems="Center" justifyContent="SpaceBetween">
+      <Text text="Role"/>
+      <Button icon="sap-icon://sort" type="Transparent" press=".onSortRole"/>
+    </HBox>
+  </Column>
+
+  <Column>
+    <HBox alignItems="Center" justifyContent="SpaceBetween">
+      <Text text="Level"/>
+      <Button icon="sap-icon://sort" type="Transparent" press=".onSortLevel"/>
+    </HBox>
+  </Column>
+
+  <Column>
+    <HBox alignItems="Center" justifyContent="SpaceBetween">
+      <Text text="Location"/>
+      <Button icon="sap-icon://sort" type="Transparent" press=".onSortLocation"/>
+    </HBox>
+  </Column>
+
+  <Column>
+    <Text text="Active"/>
+  </Column>
+
+</columns>
+
+
+          <items>
+            <ColumnListItem type="Navigation">
+              <cells>
+                <Text text="{ui>name}"/>
+                <Text text="{ui>role}"/>
+                <Text text="{ui>level}"/>
+                <Text text="{ui>location}"/>
+                <ObjectStatus
+                  text="{= ${ui>isActive} ? 'Yes' : 'No' }"
+                  state="{= ${ui>isActive} ? 'Success' : 'Error' }"/>
+              </cells>
+            </ColumnListItem>
+          </items>
+
+        </Table>
+
+      </VBox>
+    </f:content>
+
+  </f:DynamicPage>
+</mvc:View>

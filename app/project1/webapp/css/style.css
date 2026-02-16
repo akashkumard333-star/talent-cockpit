@@ -1,0 +1,50 @@
+/* Enter your custom styles here */
+.kpiBox { min-width: 160px; }
+
+/* ========== IconTabBar - show full labels under icon (scoped to noTruncTab) ========== */
+
+/* target the icon + title wrapper used in icon-only tab style */
+.noTruncTab .sapMITitle {
+  /* allow wrapping instead of single-line truncation */
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+
+  /* ensure the title can use more width */
+  display: inline-block !important;
+  max-width: none !important;
+  width: auto !important;
+  line-height: 1.05 !important;
+}
+
+/* title text inside the header cell */
+.noTruncTab .sapMITHdrTxt,
+.noTruncTab .sapMITabHdrText,
+.noTruncTab .sapMITitleText {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  display: inline-block !important;
+  max-width: none !important;
+  width: auto !important;
+  line-height: 1.05 !important;
+}
+
+/* increase header height so two-line labels look tidy */
+.noTruncTab .sapMITHdr {
+  min-height: 4.2rem !important; /* adjust as needed */
+}
+
+/* in case the icon and text are stacked, give the text more room & center it */
+.noTruncTab .sapMITitleWrap {
+  min-width: 5.5rem !important;
+  padding-left: 0.25rem !important;
+  padding-right: 0.25rem !important;
+}
+
+/* reduce the icon size slightly so longer text fits (optional) */
+.noTruncTab .sapMITitleIcon {
+  transform: scale(0.9);
+  margin-bottom: 0.08rem;
+}
+

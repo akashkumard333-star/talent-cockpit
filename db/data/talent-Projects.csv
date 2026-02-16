@@ -1,0 +1,4 @@
+ID,name,customer,startDate,endDate,status
+3b222222-bbbb-4bbb-bbbb-111111111111,S/4HANA Rollout,ACME Corp,2024-01-01,2024-12-31,Active
+3b222222-bbbb-4bbb-bbbb-222222222222,BTP Migration,Globex,2024-03-01,2024-10-31,Active
+3b222222-bbbb-4bbb-bbbb-333333333333,Fiori UX Revamp,Initech,2023-06-01,2024-02-28,Closed

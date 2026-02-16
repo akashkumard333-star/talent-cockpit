@@ -1,0 +1,158 @@
+{
+ "_version": "1.81.0",
+ "sap.app": {
+  "id": "project1",
+  "type": "application",
+  "i18n": "i18n/i18n.properties",
+  "applicationVersion": {
+   "version": "0.0.1"
+  },
+  "title": "{{appTitle}}",
+  "description": "{{appDescription}}",
+  "resources": "resources.json",
+  "sourceTemplate": {
+   "id": "@sap/generator-fiori:basic",
+   "version": "1.20.2",
+   "toolsId": "89133649-d9f1-479a-a550-b2018be2ee6b"
+  },
+  "dataSources": {
+   "mainService": {
+    "uri": "odata/v4/talent/",
+    "type": "OData",
+    "settings": {
+     "annotations": [],
+     "odataVersion": "4.0"
+    }
+   }
+  },
+  "crossNavigation": {
+   "inbounds": {
+    "Details-view": {
+     "semanticObject": "Details",
+     "action": "view",
+     "title": "{{Details-view.flpTitle}}",
+     "signature": {
+      "parameters": {},
+      "additionalParameters": "allowed"
+     }
+    }
+   }
+  }
+ },
+ "sap.ui": {
+  "technology": "UI5",
+  "icons": {
+   "icon": "",
+   "favIcon": "",
+   "phone": "",
+   "phone@2": "",
+   "tablet": "",
+   "tablet@2": ""
+  },
+  "deviceTypes": {
+   "desktop": true,
+   "tablet": true,
+   "phone": true
+  }
+ },
+ "sap.ui5": {
+  "flexEnabled": false,
+  "dependencies": {
+   "minUI5Version": "1.144.1",
+   "libs": {
+    "sap.ui.core": {},
+    "sap.m": {},
+    "sap.f": {},
+    "sap.ui.layout": {},
+    "sap.ui.comp": {}
+   }
+  },
+  "contentDensities": {
+   "compact": true,
+   "cozy": true
+  },
+  "models": {
+   "i18n": {
+    "type": "sap.ui.model.resource.ResourceModel",
+    "settings": {
+     "bundleName": "project1.i18n.i18n"
+    }
+   },
+   "": {
+    "dataSource": "mainService",
+    "preload": true,
+    "settings": {
+     "operationMode": "Server",
+     "autoExpandSelect": true,
+     "earlyRequests": true
+    }
+   }
+  },
+  "resources": {
+   "css": [
+    {
+     "uri": "css/style.css"
+    }
+   ]
+  },
+  "routing": {
+   "config": {
+    "routerClass": "sap.m.routing.Router",
+    "controlAggregation": "pages",
+    "controlId": "app",
+    "transition": "slide",
+    "type": "View",
+    "viewType": "XML",
+    "path": "project1.view",
+    "async": true
+   },
+   "routes": [
+    {
+     "name": "RouteView1",
+     "pattern": ":?query:",
+     "target": [
+      "TargetView1"
+     ]
+    },
+    {
+     "name": "RouteView2",
+     "pattern": "employee/{employeeId}",
+     "target": [
+      "TargetView2"
+     ]
+    },
+    {
+     "name": "RouteView3",
+     "pattern": "employee/{employeeId}/edit",
+     "target": [
+      "TargetView3"
+     ]
+    }
+   ],
+   "targets": {
+    "TargetView1": {
+     "id": "View1",
+     "name": "View1"
+    },
+    "TargetView2": {
+     "id": "View2",
+     "name": "View2"
+    },
+    "TargetView3": {
+     "id": "View3",
+     "name": "View3"
+    }
+   }
+  },
+  "rootView": {
+   "viewName": "project1.view.App",
+   "type": "XML",
+   "id": "App",
+   "async": true
+  }
+ },
+ "sap.cloud": {
+  "public": true,
+  "service": "talentcockpit.service"
+ }
+}

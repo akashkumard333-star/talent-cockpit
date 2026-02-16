@@ -1,0 +1,230 @@
+<mvc:View
+  controllerName="project1.controller.View3"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:core="sap.ui.core"
+  xmlns:form="sap.ui.layout.form">
+
+  <f:DynamicPage id="dpEdit" busy="{ui>/busy}" class="sapUiNoContentPadding">
+
+    <!-- Title -->
+    <f:title>
+      <f:DynamicPageTitle>
+        <f:navigationActions>
+          <Button icon="sap-icon://nav-back" type="Transparent" press=".onNavBack"/>
+        </f:navigationActions>
+
+        <f:heading>
+          <Title text="{= 'Edit: ' + ${ui>/employee/name} }" level="H2"/>
+        </f:heading>
+
+        <f:actions>
+          <Button text="Cancel" type="Transparent" press=".onCancel"/>
+          <Button text="Save" type="Emphasized" press=".onSave" enabled="{ui>/canSave}"/>
+        </f:actions>
+      </f:DynamicPageTitle>
+    </f:title>
+
+    <!-- Header -->
+    <f:header>
+      <f:DynamicPageHeader>
+        <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+          <Label text="Name"/>
+          <Input value="{ui>/employee/name}" />
+
+          <Label text="Role"/>
+          <Input value="{ui>/employee/role}" />
+
+          <Label text="Level"/>
+          <Input value="{ui>/employee/level}" />
+
+          <Label text="Location"/>
+          <Input value="{ui>/employee/location}" />
+
+          <Label text="Active"/>
+          <Switch state="{ui>/employee/isActive}" />
+        </form:SimpleForm>
+      </f:DynamicPageHeader>
+    </f:header>
+
+    <!-- Content -->
+    <f:content>
+      <IconTabBar expanded="true" class="sapUiResponsiveContentPadding" select=".onTabSelect">
+        <items>
+
+          <!-- SKILLS -->
+          <IconTabFilter key="skills" text="{= 'Skills (' + ${ui>/skills}.length + ')' }" icon="sap-icon://learning-assistant">
+            <Toolbar>
+              <Title text="Skills"/>
+              <ToolbarSpacer/>
+              <Button text="Add" icon="sap-icon://add" press=".onAddSkill"/>
+              <Button text="Delete" icon="sap-icon://delete" type="Transparent" enabled="{ui>/skillsHasSelection}" press=".onDeleteSkill"/>
+            </Toolbar>
+
+            <Table id="tblSkillsEdit"
+              mode="MultiSelect"
+              selectionChange=".onSkillsSelectionChange"
+              items="{ui>/skills}"
+              growing="true">
+
+              <columns>
+                <Column><Text text="Skill"/></Column>
+                <Column><Text text="Category"/></Column>
+                <Column><Text text="Rating"/></Column>
+                <Column><Text text="Last Used"/></Column>
+              </columns>
+
+              <items>
+                <ColumnListItem>
+                  <cells>
+                    <!-- Select skill -->
+                    <Select selectedKey="{ui>skill_ID}" change=".onSkillChanged"
+                      items="{ui>/allSkills}">
+                      <core:Item key="{ui>ID}" text="{ui>name}" />
+                    </Select>
+
+                    <Text text="{ui>category}" />
+
+                    <StepInput value="{ui>rating}" min="1" max="5" step="1" change=".markDirty"/>
+
+                    <DatePicker value="{ui>lastUsedOn}" valueFormat="yyyy-MM-dd" displayFormat="medium" change=".markDirty"/>
+                  </cells>
+                </ColumnListItem>
+              </items>
+            </Table>
+          </IconTabFilter>
+
+          <!-- ASSIGNMENTS -->
+          <IconTabFilter key="assignments" text="{= 'Assignments (' + ${ui>/assignments}.length + ')' }" icon="sap-icon://activity-2">
+            <Toolbar>
+              <Title text="Assignments"/>
+              <ToolbarSpacer/>
+              <Button text="Add" icon="sap-icon://add" press=".onAddAssignment"/>
+              <Button text="Delete" icon="sap-icon://delete" type="Transparent" enabled="{ui>/assignHasSelection}" press=".onDeleteAssignment"/>
+            </Toolbar>
+
+            <Table id="tblAssignEdit"
+              mode="MultiSelect"
+              selectionChange=".onAssignSelectionChange"
+              items="{ui>/assignments}"
+              growing="true">
+
+              <columns>
+                <Column><Text text="Project"/></Column>
+                <Column><Text text="Allocation %"/></Column>
+                <Column><Text text="From"/></Column>
+                <Column><Text text="To"/></Column>
+              </columns>
+
+              <items>
+                <ColumnListItem>
+                  <cells>
+                    <Select selectedKey="{ui>project_ID}" change=".markDirty"
+                      items="{ui>/allProjects}">
+                      <core:Item key="{ui>ID}" text="{ui>name}" />
+                    </Select>
+
+                    <StepInput value="{ui>allocationPercent}" min="1" max="100" step="5" change=".markDirty"/>
+
+                    <DatePicker value="{ui>fromDate}" valueFormat="yyyy-MM-dd" displayFormat="medium" change=".markDirty"/>
+                    <DatePicker value="{ui>toDate}" valueFormat="yyyy-MM-dd" displayFormat="medium" change=".markDirty"/>
+                  </cells>
+                </ColumnListItem>
+              </items>
+            </Table>
+          </IconTabFilter>
+
+          <!-- PROJECTS -->
+          <IconTabFilter key="projects" text="{= 'Projects (' + ${ui>/projects}.length + ')' }" icon="sap-icon://project-definition-triangle-2">
+            <Toolbar>
+              <Title text="Projects"/>
+              <ToolbarSpacer/>
+              <Button text="Add" icon="sap-icon://add" press=".onAddProject"/>
+              <Button text="Delete" icon="sap-icon://delete" type="Transparent" enabled="{ui>/projHasSelection}" press=".onDeleteProject"/>
+            </Toolbar>
+
+            <Table id="tblProjEdit"
+              mode="MultiSelect"
+              selectionChange=".onProjSelectionChange"
+              items="{ui>/projects}"
+              growing="true">
+
+              <columns>
+                <Column><Text text="Name"/></Column>
+                <Column><Text text="Customer"/></Column>
+                <Column><Text text="Status"/></Column>
+                <Column><Text text="Start"/></Column>
+                <Column><Text text="End"/></Column>
+              </columns>
+
+              <items>
+                <ColumnListItem>
+                  <cells>
+                    <Input value="{ui>name}" liveChange=".markDirty"/>
+                    <Input value="{ui>customer}" liveChange=".markDirty"/>
+                    <Select selectedKey="{ui>status}" change=".markDirty">
+                      <core:Item key="Planned" text="Planned"/>
+                      <core:Item key="Active" text="Active"/>
+                      <core:Item key="Closed" text="Closed"/>
+                    </Select>
+                    <DatePicker value="{ui>startDate}" valueFormat="yyyy-MM-dd" displayFormat="medium" change=".markDirty"/>
+                    <DatePicker value="{ui>endDate}" valueFormat="yyyy-MM-dd" displayFormat="medium" change=".markDirty"/>
+                  </cells>
+                </ColumnListItem>
+              </items>
+            </Table>
+          </IconTabFilter>
+
+          <!-- DEMANDS -->
+          <IconTabFilter key="demands" text="{= 'Demands (' + ${ui>/demands}.length + ')' }" icon="sap-icon://checklist">
+            <Toolbar>
+              <Title text="Project Demands"/>
+              <ToolbarSpacer/>
+              <Button text="Add" icon="sap-icon://add" press=".onAddDemand"/>
+              <Button text="Delete" icon="sap-icon://delete" type="Transparent" enabled="{ui>/demHasSelection}" press=".onDeleteDemand"/>
+            </Toolbar>
+
+            <Table id="tblDemEdit"
+              mode="MultiSelect"
+              selectionChange=".onDemSelectionChange"
+              items="{ui>/demands}"
+              growing="true">
+
+              <columns>
+                <Column><Text text="Project"/></Column>
+                <Column><Text text="Skill"/></Column>
+                <Column><Text text="Min Rating"/></Column>
+                <Column><Text text="From"/></Column>
+                <Column><Text text="To"/></Column>
+              </columns>
+
+              <items>
+                <ColumnListItem>
+                  <cells>
+                    <Select selectedKey="{ui>project_ID}" change=".markDirty"
+                      items="{ui>/allProjects}">
+                      <core:Item key="{ui>ID}" text="{ui>name}" />
+                    </Select>
+
+                    <Select selectedKey="{ui>requiredSkill_ID}" change=".markDirty"
+                      items="{ui>/allSkills}">
+                      <core:Item key="{ui>ID}" text="{ui>name}" />
+                    </Select>
+
+                    <StepInput value="{ui>minRating}" min="1" max="5" step="1" change=".markDirty"/>
+
+                    <DatePicker value="{ui>neededFrom}" valueFormat="yyyy-MM-dd" displayFormat="medium" change=".markDirty"/>
+                    <DatePicker value="{ui>neededTo}" valueFormat="yyyy-MM-dd" displayFormat="medium" change=".markDirty"/>
+                  </cells>
+                </ColumnListItem>
+              </items>
+            </Table>
+          </IconTabFilter>
+
+        </items>
+      </IconTabBar>
+    </f:content>
+
+  </f:DynamicPage>
+</mvc:View>

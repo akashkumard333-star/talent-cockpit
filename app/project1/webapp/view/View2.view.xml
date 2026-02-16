@@ -1,0 +1,174 @@
+<mvc:View
+  controllerName="project1.controller.View2"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:core="sap.ui.core"
+  xmlns:form="sap.ui.layout.form">
+
+  <f:DynamicPage id="dpDetail" busy="{ui>/busy}" class="sapUiNoContentPadding">
+
+    <!-- Title -->
+    <f:title>
+      <f:DynamicPageTitle>
+        <f:navigationActions>
+          <Button icon="sap-icon://nav-back" type="Transparent" press=".onNavBack"/>
+        </f:navigationActions>
+
+        <f:heading>
+          <Title text="{ui>/employee/name}" level="H2"/>
+        </f:heading>
+
+        <f:actions>
+          <Button text="Edit" type="Emphasized" press=".onEdit"/>
+        </f:actions>
+      </f:DynamicPageTitle>
+    </f:title>
+
+    <!-- Header -->
+    <f:header>
+      <f:DynamicPageHeader>
+        <form:SimpleForm editable="false" layout="ResponsiveGridLayout">
+          <Label text="Role"/>
+          <Text text="{ui>/employee/role}"/>
+
+          <Label text="Level"/>
+          <Text text="{ui>/employee/level}"/>
+
+          <Label text="Location"/>
+          <Text text="{ui>/employee/location}"/>
+
+          <Label text="Active"/>
+          <ObjectStatus
+            text="{= ${ui>/employee/isActive} ? 'Yes' : 'No' }"
+            state="{= ${ui>/employee/isActive} ? 'Success' : 'Error' }"/>
+        </form:SimpleForm>
+      </f:DynamicPageHeader>
+    </f:header>
+
+    <!-- Content -->
+    <f:content>
+     <IconTabBar
+  id="itbDetail"
+  expanded="true"
+  class="sapUiResponsiveContentPadding noTruncTab"
+  upperCase="false"
+  select=".onTabSelect">
+
+  <items>
+
+    <IconTabFilter
+      key="skills"
+      text="{= 'Skills (' + ${ui>/skills}.length + ')' }"
+      tooltip="Skills"
+      icon="sap-icon://learning-assistant">
+
+      <Table id="tblSkillsDetail" items="{ui>/skills}" growing="true">
+        <columns>
+          <Column><Text text="Skill"/></Column>
+          <Column><Text text="Category"/></Column>
+          <Column><Text text="Rating"/></Column>
+          <Column><Text text="Last Used"/></Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Text text="{ui>skillName}"/>
+              <Text text="{ui>category}"/>
+              <ObjectNumber number="{ui>rating}"/>
+              <Text text="{ui>lastUsedOn}"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </IconTabFilter>
+
+    <IconTabFilter
+      key="assignments"
+      text="{= 'Assignments (' + ${ui>/assignments}.length + ')' }"
+      tooltip="Assignments"
+      icon="sap-icon://activity-2">
+
+      <Table id="tblAssignDetail" items="{ui>/assignments}" growing="true">
+        <columns>
+          <Column><Text text="Project"/></Column>
+          <Column><Text text="Allocation %"/></Column>
+          <Column><Text text="From"/></Column>
+          <Column><Text text="To"/></Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Text text="{ui>projectName}"/>
+              <ObjectNumber number="{ui>allocationPercent}" unit="%"/>
+              <Text text="{ui>fromDate}"/>
+              <Text text="{ui>toDate}"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </IconTabFilter>
+
+    <IconTabFilter
+      key="projects"
+      text="{= 'Projects (' + ${ui>/projects}.length + ')' }"
+      tooltip="Projects"
+      icon="sap-icon://project-definition-triangle-2">
+
+      <Table id="tblProjDetail" items="{ui>/projects}" growing="true">
+        <columns>
+          <Column><Text text="Name"/></Column>
+          <Column><Text text="Customer"/></Column>
+          <Column><Text text="Status"/></Column>
+          <Column><Text text="Start"/></Column>
+          <Column><Text text="End"/></Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Text text="{ui>name}"/>
+              <Text text="{ui>customer}"/>
+              <ObjectStatus text="{ui>status}"/>
+              <Text text="{ui>startDate}"/>
+              <Text text="{ui>endDate}"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </IconTabFilter>
+
+    <IconTabFilter
+      key="demands"
+      text="{= 'Demands (' + ${ui>/demands}.length + ')' }"
+      tooltip="Demands"
+      icon="sap-icon://checklist">
+
+      <Table id="tblDemDetail" items="{ui>/demands}" growing="true">
+        <columns>
+          <Column><Text text="Project"/></Column>
+          <Column><Text text="Skill"/></Column>
+          <Column><Text text="Min Rating"/></Column>
+          <Column><Text text="From"/></Column>
+          <Column><Text text="To"/></Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Text text="{ui>projectName}"/>
+              <Text text="{ui>skillName}"/>
+              <ObjectNumber number="{ui>minRating}"/>
+              <Text text="{ui>neededFrom}"/>
+              <Text text="{ui>neededTo}"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </IconTabFilter>
+
+  </items>
+</IconTabBar>
+
+    </f:content>
+
+  </f:DynamicPage>
+</mvc:View>
