@@ -2,7 +2,7 @@
 
 <div align="center">
   <img
-    src="https://raw.githubusercontent.com/akashkumard333-star/akashkumard333/main/assets/akash-banner.png"
+    src="https://github.com/akashkumard333-star/akashkumard333/blob/90a3f2d0e1c9072edac6bf2ae9974768b0c1d347/assets/home.jpjg.png"
     alt="Talent Cockpit | SAP CAP Full Stack Application"
     style="width:100%; max-width:1200px; border-radius:18px;"
   />
@@ -94,13 +94,13 @@ SAP HANA / SQLite
 <div align="center">
 
 ### 🔎 Employee List
-<img src="images/list.png" width="800"/>
+<img src="https://github.com/akashkumard333-star/akashkumard333/blob/90a3f2d0e1c9072edac6bf2ae9974768b0c1d347/assets/home2.jpjg.png" width="800"/>
 
 ### 📄 Object Page
-<img src="images/detail.png" width="800"/>
+<img src="https://github.com/akashkumard333-star/akashkumard333/blob/90a3f2d0e1c9072edac6bf2ae9974768b0c1d347/assets/view.jpjg.png" width="800"/>
 
 ### ✏️ Edit Mode
-<img src="images/edit.png" width="800"/>
+<img src="https://github.com/akashkumard333-star/akashkumard333/blob/90a3f2d0e1c9072edac6bf2ae9974768b0c1d347/assets/Edit.jpjg.png" width="800"/>
 
 </div>
 
@@ -109,7 +109,7 @@ SAP HANA / SQLite
 ## 🎥 Demo Video
 
 ▶️ Watch Full Walkthrough  
-[Click Here to Watch Demo](videos/demo.mp4)
+https://github.com/akashkumard333-star/akashkumard333/blob/90a3f2d0e1c9072edac6bf2ae9974768b0c1d347/assets/SAP%20Capm.mov
 
 ---
 
